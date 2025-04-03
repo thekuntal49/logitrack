@@ -12,7 +12,7 @@ export const InventoryProvider = ({ children }) => {
   // Fetch items from the backend
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/items")
+      .get("https://logitrack-00dq.onrender.com/api/items")
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching items:", err));
   }, []);
@@ -20,7 +20,10 @@ export const InventoryProvider = ({ children }) => {
   // Add new item
   const addItem = async (newItem) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/items", newItem);
+      const res = await axios.post(
+        "https://logitrack-00dq.onrender.com/api/items",
+        newItem
+      );
       setItems([...items, res.data]); // Update state with new item
     } catch (err) {
       console.error("Error adding item:", err);
@@ -30,7 +33,7 @@ export const InventoryProvider = ({ children }) => {
   // Update item quantity when dispatching
   const dispatchItem = async (id, newQuantity) => {
     try {
-      await axios.put(`http://localhost:5000/api/items/${id}`, {
+      await axios.put(`https://logitrack-00dq.onrender.com/api/items/${id}`, {
         quantity: newQuantity,
       });
       setItems(
@@ -46,7 +49,7 @@ export const InventoryProvider = ({ children }) => {
   // Delete item
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/items/${id}`);
+      await axios.delete(`https://logitrack-00dq.onrender.com/api/items/${id}`);
       setItems(items.filter((item) => item._id !== id));
     } catch (err) {
       console.error("Error deleting item:", err);
